@@ -1,0 +1,64 @@
+@use "./variables.scss" as *;
+@use "./layout.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-family;
+  font-size: $font-size-base;
+  color: $text-color;
+  background-color: $background-color;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: $container-width;
+  margin: 0 auto;
+  padding: 0 $spacing-medium;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+  margin-bottom: $spacing-small;
+}
+
+p {
+  margin-bottom: $spacing-small;
+}
+
+.content {
+  margin-left: 250px;
+  padding: 20px;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px; /* Ширина бокового навбара */
+  height: 100vh; /* Высота на весь экран */
+  background-color: #f4f4f4; /* Цвет фона навбара */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Тень для навбара */
+  z-index: 10;
+  padding: 20px; /* Отступы внутри навбара */
+  box-sizing: border-box;
+}
+
+.main-content {
+  margin-left: 200px; /* Отступ слева для навбара */
+  padding: 20px; /* Внутренние отступы для контента */
+  min-height: 100vh; /* Гарантирует высоту страницы */
+  background-color: #fff; /* Фон для основной области */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
