@@ -35,29 +35,31 @@ p {
   margin-bottom: $spacing-small;
 }
 
+.body-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
 .content {
   margin-left: 250px;
   padding: 20px;
 }
 
 nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 200px; /* Ширина бокового навбара */
-  height: 100vh; /* Высота на весь экран */
-  background-color: #f4f4f4; /* Цвет фона навбара */
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Тень для навбара */
+  min-width: 250px;
+  height: 100vh;
+  background-color: #f4f4f4;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   z-index: 10;
-  padding: 20px; /* Отступы внутри навбара */
+  padding: 20px;
   box-sizing: border-box;
 }
 
 .main-content {
-  margin-left: 200px; /* Отступ слева для навбара */
-  padding: 20px; /* Внутренние отступы для контента */
-  min-height: 100vh; /* Гарантирует высоту страницы */
-  background-color: #fff; /* Фон для основной области */
+  width: 100%;
+  padding: 20px;
+  min-height: 100vh;
+  background-color: #fff;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;

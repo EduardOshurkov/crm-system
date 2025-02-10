@@ -10,7 +10,7 @@ import "./styles/global.scss";
 const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <div>
+      <div className="body-wrapper">
         <nav>
           <Navbar />
         </nav>
