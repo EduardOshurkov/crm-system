@@ -24,7 +24,11 @@ export const createCounterparty = async (req: Request, res: Response) => {
 export const updateCounterparty = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const updateCounterparty = await Counterparty.findByIdAndUpdate(id, req.body, { new: true });
+    const updateCounterparty = await Counterparty.findByIdAndUpdate(
+      id,
+      req.body,
+      { new: true }
+    );
     res.status(200).json(updateCounterparty);
   } catch (error) {
     res.status(500).json({ message: "Error updating counterparty" });
@@ -34,8 +38,7 @@ export const updateCounterparty = async (req: Request, res: Response) => {
 export const deleteCounterparty = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    await Counterparty.findByIdAndDelete(id);
-    res.status(200).json({ message: "Counterparty deleted" });
+    res.status(200).json({ message: `${id} Counterparty deleted` });
   } catch (error) {
     res.status(500).json({ message: "Error deleting counterparty" });
   }
