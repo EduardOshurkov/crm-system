@@ -3,7 +3,7 @@ import { Counterparty } from "../types/types";
 
 export const api = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5001/api" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "https://crm-system-31t5.onrender.com/api" }),
   tagTypes: ["Counterparty"],
   endpoints: (builder) => ({
     getCounterparties: builder.query<Counterparty[], void>({
