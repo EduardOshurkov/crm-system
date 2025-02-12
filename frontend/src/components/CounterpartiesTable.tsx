@@ -5,6 +5,7 @@ import {
   useDeleteCounterpartyMutation,
   useUpdateCounterpartyMutation,
 } from "../store/api";
+import { Counterparty } from "../types/types";
 import { DeleteButton, EditButton } from "./buttons/MuiButtons";
 import {
   Button,
@@ -20,21 +21,21 @@ const CounterpartiesTable: React.FC = () => {
   const [deleteCounterparty] = useDeleteCounterpartyMutation();
   const [updateCounterparty] = useUpdateCounterpartyMutation();
 
-  const [editData, setEditData] = useState(null);
+  const [editData, setEditData] = useState<Counterparty | null>(null);
   const [isEditOpen, setEditOpen] = useState(false);
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: string) => {
     if (window.confirm("Are you sure want to delete this counterparty")) {
       await deleteCounterparty(id).unwrap();
       console.log(id);
     }
   };
 
-  const handleEdit = (row) => {
+  const handleEdit = (row: Counterparty) => {
     setEditData(row);
     setEditOpen(true);
   };
-  console.log(rows);
+
   const handleCloseEdit = () => {
     setEditOpen(false);
     setEditData(null);
@@ -47,8 +48,14 @@ const CounterpartiesTable: React.FC = () => {
     }
   };
 
-  const handleChange = (e) => {
-    setEditData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEditData((prev) => {
+      if (!prev) return prev;
+      return {
+        ...prev,
+        [e.target.name]: e.target.type === "number" ? +e.target.value : e.target.value,
+      };
+    });
   };
 
   const columns: GridColDef[] = [
