@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AddCounterpartyModal from "../components/counterparty-modal/AddCounterpartyModal";
+import AddCounterpartyModal from "../components/counterparty-modal/add-counterparty-modal/AddCounterpartyModal";
 import CounterpartiesTable from "../components/counterparty-table/CounterpartiesTable";
 import { AddButton } from "../components/buttons/MuiButtons";
 

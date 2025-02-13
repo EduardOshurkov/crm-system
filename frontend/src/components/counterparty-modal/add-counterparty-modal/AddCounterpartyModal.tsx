@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useCreateCounterpartyMutation } from "../../store/api";
+import { useCreateCounterpartyMutation } from "../../../store/api";
 import "./AddCounterpartyModal.scss";
 
 interface AddCounterpartyModalProps {
@@ -93,12 +93,14 @@ const AddCounterpartyModal: React.FC<AddCounterpartyModalProps> = ({ onClose }) 
             <option value="Active">Active</option>
             <option value="Inactive">Inactive</option>
           </select>
-          <button type="submit" disabled={isLoading}>
+          <button className="modal-button close" onClick={onClose}>
+            Close
+          </button>
+          <button className="modal-button save" type="submit" disabled={isLoading}>
             {isLoading ? "Saving..." : "Save"}
           </button>
         </form>
         {isError && <p style={{ color: "red" }}>Error occurred while saving.</p>}
-        <button onClick={onClose}>Close</button>
       </div>
     </div>
   );

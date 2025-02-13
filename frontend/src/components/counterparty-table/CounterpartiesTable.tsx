@@ -8,14 +8,7 @@ import {
 } from "../../store/api";
 import { Counterparty } from "../../types/types";
 import { DeleteButton, EditButton } from "../buttons/MuiButtons";
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  TextField,
-} from "@mui/material";
+import CounterpartyEditModal from "../counterparty-modal/edit-counterparty-modal/CounterpartyEditModal";
 
 const CounterpartiesTable: React.FC = () => {
   const { data: rows = [], isLoading, isError } = useGetCounterpartiesQuery();
@@ -54,7 +47,7 @@ const CounterpartiesTable: React.FC = () => {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setEditData((prev) => {
       if (!prev) return prev;
       return {
@@ -115,63 +108,32 @@ const CounterpartiesTable: React.FC = () => {
           },
         }}
       />
-      <Dialog open={isEditOpen} onClose={handleCloseEdit}>
-        <DialogTitle>Edit Counterparty</DialogTitle>
-        <DialogContent>
-          <TextField
-            name="name"
-            label="Name"
-            fullWidth
-            value={editData?.name || ""}
-            onChange={handleChange}
-          />
-          <TextField
-            name="address"
-            label="Address"
-            fullWidth
-            value={editData?.address || ""}
-            onChange={handleChange}
-          />
-          <TextField
-            name="production"
-            label="Production"
-            fullWidth
-            value={editData?.production}
-            onChange={handleChange}
-          />
-          <TextField
-            name="price"
-            label="Price"
-            type="number"
-            fullWidth
-            value={editData?.price}
-            onChange={handleChange}
-          />
-          <TextField
-            name="phone"
-            label="Phone"
-            fullWidth
-            value={editData?.phone}
-            onChange={handleChange}
-          />
-          <TextField
-            name="status"
-            label="Status"
-            fullWidth
-            value={editData?.status}
-            onChange={handleChange}
-          />
-
-          <DialogActions>
-            <Button onClick={handleCloseEdit} color="secondary">
-              Cancel
-            </Button>
-            <Button onClick={handleSaveEdit} color="primary">
-              Save
-            </Button>
-          </DialogActions>
-        </DialogContent>
-      </Dialog>
+      <CounterpartyEditModal
+        isOpen={isEditOpen}
+        onClose={() => setEditOpen(false)}
+        onSave={handleSaveEdit}
+      >
+        <h2>Edit Counterparty</h2>
+        <input name="name" placeholder="Name" value={editData?.name} onChange={handleChange} />
+        <input
+          name="address"
+          placeholder="Address"
+          value={editData?.address}
+          onChange={handleChange}
+        />
+        <input
+          name="production"
+          placeholder="Production"
+          value={editData?.production}
+          onChange={handleChange}
+        />
+        <input name="price" placeholder="Price" value={editData?.price} onChange={handleChange} />
+        <input name="phone" placeholder="Phone" value={editData?.phone} onChange={handleChange} />
+        <select name="status" value={editData?.status} onChange={handleChange}>
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+        </select>
+      </CounterpartyEditModal>
     </div>
   );
 };
