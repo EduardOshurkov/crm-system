@@ -24,10 +24,15 @@ const CounterpartiesTable: React.FC = () => {
   const [editData, setEditData] = useState<Counterparty | null>(null);
   const [isEditOpen, setEditOpen] = useState(false);
 
-  const handleDelete = async (id: string) => {
-    if (window.confirm("Are you sure want to delete this counterparty")) {
-      await deleteCounterparty(id).unwrap();
-      console.log(id);
+  const handleDelete = async (_id: string) => {
+    if (window.confirm("Are you sure you want to delete this counterparty?")) {
+      console.log("Deleting ID:", _id);
+      try {
+        await deleteCounterparty({ _id }).unwrap();
+        console.log("Counterparty deleted successfully");
+      } catch (error) {
+        console.error("Error deleting counterparty:", error);
+      }
     }
   };
 
@@ -43,7 +48,7 @@ const CounterpartiesTable: React.FC = () => {
 
   const handleSaveEdit = async () => {
     if (editData) {
-      await updateCounterparty({ id: editData.id, updateData: editData });
+      await updateCounterparty({ id: editData._id, updateData: editData });
       handleCloseEdit();
     }
   };
@@ -53,13 +58,13 @@ const CounterpartiesTable: React.FC = () => {
       if (!prev) return prev;
       return {
         ...prev,
-        [e.target.name]: e.target.type === "number" ? +e.target.value : e.target.value,
+        [e.target.name]: e.target.type === "number" ? e.target.value : e.target.value,
       };
     });
   };
 
   const columns: GridColDef[] = [
-    { field: "_id", headerName: "ID" },
+    { field: "id", headerName: "ID" },
     { field: "name", headerName: "Name" },
     { field: "address", headerName: "Address" },
     { field: "production", headerName: "Production" },

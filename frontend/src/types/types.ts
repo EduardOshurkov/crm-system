@@ -1,5 +1,5 @@
 export type Counterparty = {
-  id: number;
+  _id: number;
   name: string;
   address: string;
   production: string;

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Counterparty from "../models/Counterparty";
+import { promises } from "dns";
 
 export const getCounterparties = async (req: Request, res: Response) => {
   try {
@@ -35,11 +36,20 @@ export const updateCounterparty = async (req: Request, res: Response) => {
   }
 };
 
-export const deleteCounterparty = async (req: Request, res: Response) => {
+export const deleteCounterparty = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const { id } = req.params;
+    const result = await Counterparty.findByIdAndDelete(id);
+    if (!result) {
+      res.status(404).json({ message: "Counterparty not found" });
+    }
+    console.log("Received ID:", req.params.id);
     res.status(200).json({ message: `${id} Counterparty deleted` });
   } catch (error) {
+    console.log("❌ Error deleting counterparty:", error);
     res.status(500).json({ message: "Error deleting counterparty" });
   }
 };

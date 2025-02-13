@@ -3,7 +3,7 @@ import { Counterparty } from "../types/types";
 
 export const api = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://crm-system-31t5.onrender.com/api" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "https://crm-system-31t5.onrender.com" }),
   tagTypes: ["Counterparty"],
   endpoints: (builder) => ({
     getCounterparties: builder.query<Counterparty[], void>({
@@ -26,8 +26,8 @@ export const api = createApi({
       invalidatesTags: ["Counterparty"],
     }),
     deleteCounterparty: builder.mutation({
-      query: ({ id }) => ({
-        url: `/counterparties/${id}`,
+      query: ({ _id }) => ({
+        url: `/counterparties/${_id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Counterparty"],

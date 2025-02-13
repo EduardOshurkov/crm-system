@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import express, { Request, Response } from "express";
 import counterpartyRoutes from "./routes/counterpartyRoutes";
+import Counterparty from "./models/Counterparty";
 
 dotenv.config();
 
