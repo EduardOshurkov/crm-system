@@ -13,7 +13,15 @@ interface ButtonProps {
 const AddButton: React.FC<ButtonProps> = ({ onClick, label, icon = <Add /> }) => {
   return (
     <ThemeProvider theme={theme}>
-      <Button variant="contained" color="customPurple" startIcon={icon} onClick={onClick}>
+      <Button
+        variant="contained"
+        color="customPurple"
+        startIcon={icon}
+        onClick={onClick}
+        sx={{
+          marginBottom: 2,
+        }}
+      >
         {label}
       </Button>
     </ThemeProvider>
@@ -28,6 +36,8 @@ const EditButton: React.FC<ButtonProps> = ({ onClick }) => {
         sx={{
           backgroundColor: theme.palette.customPurple.main,
           color: theme.palette.customPurple.contrastText,
+          width: 30,
+          height: 30,
         }}
       >
         <Edit />
@@ -45,6 +55,8 @@ const DeleteButton: React.FC<ButtonProps> = ({ onClick }) => {
           backgroundColor: theme.palette.customPurple.main,
           color: theme.palette.customPurple.contrastText,
           marginLeft: "5px",
+          width: 30,
+          height: 30,
         }}
       >
         <Delete />

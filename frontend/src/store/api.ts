@@ -8,6 +8,7 @@ export const api = createApi({
   endpoints: (builder) => ({
     getCounterparties: builder.query<Counterparty[], void>({
       query: () => "/counterparties",
+      providesTags: ["Counterparty"],
     }),
     createCounterparty: builder.mutation({
       query: (newCounterparty) => ({

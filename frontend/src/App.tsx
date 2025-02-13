@@ -4,7 +4,7 @@ import CounterpartiesPage from "./pages/CounterpartiesPage";
 import HomePage from "./pages/HomePage";
 import ReportsPage from "./pages/ReportsPage";
 import TransactionsPage from "./pages/TransactionsPage";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/main-navbar/Navbar";
 import "./styles/global.scss";
 
 const App: React.FC = () => {

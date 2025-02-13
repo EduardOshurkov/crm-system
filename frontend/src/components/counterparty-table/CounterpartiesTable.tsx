@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { format } from "date-fns";
 import {
   useGetCounterpartiesQuery,
   useDeleteCounterpartyMutation,
   useUpdateCounterpartyMutation,
-} from "../store/api";
-import { Counterparty } from "../types/types";
-import { DeleteButton, EditButton } from "./buttons/MuiButtons";
+} from "../../store/api";
+import { Counterparty } from "../../types/types";
+import { DeleteButton, EditButton } from "../buttons/MuiButtons";
 import {
   Button,
   Dialog,
@@ -64,17 +65,26 @@ const CounterpartiesTable: React.FC = () => {
   };
 
   const columns: GridColDef[] = [
-    { field: "id", headerName: "ID" },
-    { field: "name", headerName: "Name" },
-    { field: "address", headerName: "Address" },
-    { field: "production", headerName: "Production" },
-    { field: "price", headerName: "Price ($)" },
-    { field: "phone", headerName: "Phone" },
-    { field: "status", headerName: "Status" },
+    // { field: "id", headerName: "ID", flex: 1 },
+    { field: "name", headerName: "Name", flex: 1 },
+    { field: "address", headerName: "Address", flex: 1 },
+    { field: "production", headerName: "Production", flex: 1 },
+    { field: "price", headerName: "Price ($)", flex: 1 },
+    { field: "phone", headerName: "Phone", flex: 1 },
+    { field: "status", headerName: "Status", flex: 1 },
+    {
+      field: "createdAt",
+      headerName: "Created",
+      flex: 1,
+      valueFormatter: (params) => {
+        const date = params;
+        return date ? format(new Date(date), "dd/MM/yyyy") : "";
+      },
+    },
     {
       field: "actions",
       headerName: "Actions",
-      flex: 0.6,
+      flex: 1,
       sortable: false,
       renderCell: (params) => (
         <>
@@ -151,6 +161,7 @@ const CounterpartiesTable: React.FC = () => {
             value={editData?.status}
             onChange={handleChange}
           />
+
           <DialogActions>
             <Button onClick={handleCloseEdit} color="secondary">
               Cancel

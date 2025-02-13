@@ -4,7 +4,7 @@ import HomePage from "../pages/HomePage";
 import CounterpartiesPage from "../pages/CounterpartiesPage";
 import TransactionsPage from "../pages/TransactionsPage";
 import ReportsPage from "../pages/ReportsPage";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/main-navbar/Navbar";
 
 const AppRouter: React.FC = () => {
   return (

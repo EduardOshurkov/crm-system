@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import AddCounterpartyModal from "../components/AddCounterpartyModal";
-import CounterpartiesTable from "../components/CounterpartiesTable";
+import AddCounterpartyModal from "../components/counterparty-modal/AddCounterpartyModal";
+import CounterpartiesTable from "../components/counterparty-table/CounterpartiesTable";
 import { AddButton } from "../components/buttons/MuiButtons";
 
 const CounterpartiesPage: React.FC = () => {
@@ -11,7 +11,6 @@ const CounterpartiesPage: React.FC = () => {
 
   return (
     <div>
-      <h1>Counterparties</h1>
       <AddButton onClick={openModal} label="Add Counterparty" />
       <CounterpartiesTable />
       {isModalOpen && <AddCounterpartyModal onClose={closeModal} />}

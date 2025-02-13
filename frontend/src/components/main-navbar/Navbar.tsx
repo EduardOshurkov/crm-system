@@ -18,7 +18,7 @@ const Navbar: React.FC = () => {
         </li>
         <li className={location.pathname === "/counterparties" ? "active" : ""}>
           <Link to="/counterparties">
-            <FaUsers /> Customers
+            <FaUsers /> Counterparties
           </Link>
         </li>
         <li className={location.pathname === "/transactions" ? "active" : ""}>

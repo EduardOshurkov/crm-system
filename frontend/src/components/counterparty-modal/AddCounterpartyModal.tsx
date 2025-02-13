@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useCreateCounterpartyMutation } from "../store/api";
+import { useCreateCounterpartyMutation } from "../../store/api";
 import "./AddCounterpartyModal.scss";
 
 interface AddCounterpartyModalProps {
