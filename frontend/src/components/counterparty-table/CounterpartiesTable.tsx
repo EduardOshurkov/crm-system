@@ -9,6 +9,13 @@ import {
 import { Counterparty } from "../../types/types";
 import { DeleteButton, EditButton } from "../buttons/MuiButtons";
 import CounterpartyEditModal from "../counterparty-modal/edit-counterparty-modal/CounterpartyEditModal";
+import Select from "react-select";
+import "./CounterpartiesTable.scss";
+
+const statusOptions = [
+  { value: "Active", label: "Active" },
+  { value: "Inactive", label: "Inactive" },
+];
 
 const CounterpartiesTable: React.FC = () => {
   const { data: rows = [], isLoading, isError } = useGetCounterpartiesQuery();
@@ -57,8 +64,16 @@ const CounterpartiesTable: React.FC = () => {
     });
   };
 
+  const handleSelectChange = (selectedOption: { value: string } | null) => {
+    handleChange({
+      target: {
+        name: "status",
+        value: selectedOption?.value ?? "",
+      },
+    } as unknown as React.ChangeEvent<HTMLInputElement>);
+  };
+
   const columns: GridColDef[] = [
-    // { field: "id", headerName: "ID", flex: 1 },
     { field: "name", headerName: "Name", flex: 1 },
     { field: "address", headerName: "Address", flex: 1 },
     { field: "production", headerName: "Production", flex: 1 },
@@ -129,10 +144,16 @@ const CounterpartiesTable: React.FC = () => {
         />
         <input name="price" placeholder="Price" value={editData?.price} onChange={handleChange} />
         <input name="phone" placeholder="Phone" value={editData?.phone} onChange={handleChange} />
-        <select name="status" value={editData?.status} onChange={handleChange}>
-          <option value="Active">Active</option>
-          <option value="Inactive">Inactive</option>
-        </select>
+        <Select
+          className="react-select-container"
+          classNamePrefix="react-select"
+          name="status"
+          options={statusOptions}
+          value={statusOptions.find((option) => option.value === editData?.status) || null}
+          onMenuOpen={() => console.log("opened")}
+          onChange={handleSelectChange}
+          onInputChange={() => {}}
+        />
       </CounterpartyEditModal>
     </div>
   );

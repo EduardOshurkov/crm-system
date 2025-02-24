@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import { useCreateCounterpartyMutation } from "../../../store/api";
 import "./AddCounterpartyModal.scss";
+import Select from "react-select";
 
 interface AddCounterpartyModalProps {
   onClose: () => void;
 }
+
+const statusOptions = [
+  { value: "Active", label: "Active" },
+  { value: "Inactive", label: "Inactive" },
+];
 
 const AddCounterpartyModal: React.FC<AddCounterpartyModalProps> = ({ onClose }) => {
   const [formData, setFormData] = useState({
@@ -21,6 +27,15 @@ const AddCounterpartyModal: React.FC<AddCounterpartyModalProps> = ({ onClose }) 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSelectChange = (selectedOption: { value: string } | null) => {
+    handleChange({
+      target: {
+        name: "status",
+        value: selectedOption?.value ?? "",
+      },
+    } as unknown as React.ChangeEvent<HTMLInputElement>);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -89,10 +104,16 @@ const AddCounterpartyModal: React.FC<AddCounterpartyModalProps> = ({ onClose }) 
             onChange={handleChange}
             required
           />
-          <select name="status" value={formData.status} onChange={handleChange} required>
-            <option value="Active">Active</option>
-            <option value="Inactive">Inactive</option>
-          </select>
+          <Select
+            className="react-select-container"
+            classNamePrefix="react-select"
+            name="status"
+            options={statusOptions}
+            value={statusOptions.find((option) => option.value === formData?.status) || null}
+            onMenuOpen={() => console.log("opened")}
+            onChange={handleSelectChange}
+            onInputChange={() => {}}
+          />
           <button className="modal-button close" onClick={onClose}>
             Close
           </button>

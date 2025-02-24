@@ -16,6 +16,9 @@ declare module "@mui/material/styles" {
 }
 
 const theme = createTheme({
+  typography: {
+    fontFamily: "'Inter', sans-serif",
+  },
   palette: {
     primary: {
       main: "#5932ea",

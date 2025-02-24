@@ -1,0 +1,20 @@
+@use "../../styles/variables.scss" as *;
+
+.react-select__control {
+  border-color: $primary-color !important;
+}
+
+.react-select__indicator-separator {
+  background-color: $primary-color !important;
+}
+
+.react-select__indicator {
+  color: $primary-color !important;
+}
+
+.react-select__value-container {
+  justify-content: left;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
