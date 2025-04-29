@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import express, { Request, Response } from "express";
 import counterpartyRoutes from "./routes/counterpartyRoutes";
+import transactionsRoutes from "./routes/transactionsRoutes";
 import Counterparty from "./models/Counterparty";
 
 dotenv.config();
@@ -26,6 +27,7 @@ mongoose
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
 app.use("/api/counterparties", counterpartyRoutes);
+app.use("/api/transaction", transactionsRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("API is running");
